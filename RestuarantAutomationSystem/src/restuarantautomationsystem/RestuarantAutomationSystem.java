@@ -4,6 +4,10 @@
  */
 package restuarantautomationsystem;
 
+import GUI.EmployeeLoginGUI;
+
+
+
 /**
  *
  * @author karpagaganeshpatchirajan
@@ -14,6 +18,10 @@ public class RestuarantAutomationSystem {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        // TODO code application logic he     
+        System.out.println("Welcome to Restuarant!!");
+        EmployeeLoginGUI loginGui = new EmployeeLoginGUI();
+        loginGui.showGUI();
+        
     }
 }
