@@ -109,7 +109,7 @@ public class EmployeeLoginGUI extends javax.swing.JFrame {
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(loginGUIOkButton)
                     .add(jButton2))
-                .addContainerGap(267, Short.MAX_VALUE))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
 
         pack();
@@ -121,15 +121,21 @@ public class EmployeeLoginGUI extends javax.swing.JFrame {
         boolean status = false;
         String empID = null;
         String password = null;
-        
+        String statusString="";
+        String waiterConstant = "waiter";
+        String hostConstant = "host";
             empID = empText.getText();
             password = passwordText.getText();
             if(!empID.isEmpty() && !password.isEmpty() ){
                 Controller controller = new Controller();
-                status = controller.EnterCredentials(empID,password);
-                if(status == true){
+                statusString = controller.EnterCredentials(empID,password);
+                if(waiterConstant.equalsIgnoreCase(statusString)){
                     WaiterGUI waitergui = new WaiterGUI();
-                    waitergui.showGUI();
+                    waitergui.showGUI(empID);
+                }
+                else if(hostConstant.equalsIgnoreCase(statusString)){
+                    HostGUI hostgui = new HostGUI();
+                    hostgui.showGUI();
                 }
                 else{
                      JOptionPane.showMessageDialog(null, "Invalid Credentials");
@@ -171,8 +177,8 @@ public class EmployeeLoginGUI extends javax.swing.JFrame {
     
     public void showGUI(){
         setVisible(true);
-        empText.setText("test");
-        passwordText.setText("test");
+        empText.setText("host");
+        passwordText.setText("host");
         
     }
     /**

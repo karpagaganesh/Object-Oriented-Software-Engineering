@@ -14,7 +14,8 @@ import restuarantautomationsystem.Controller;
  * @author karpagaganeshpatchirajan
  */
 public class WaiterGUI extends javax.swing.JFrame {
-
+    
+    String empID ="";
     /**
      * Creates new form WaiterGUI
      */
@@ -34,20 +35,18 @@ public class WaiterGUI extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         waiterGUIEmpText = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
         WaiterGUITableText = new javax.swing.JTextField();
         changeTableStatusButton = new javax.swing.JButton();
         newOrderButton = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Waiter Operation Screen");
 
         jLabel2.setText("Employee Name");
-
-        jLabel3.setText("Assigned Table");
 
         changeTableStatusButton.setText("Change Table Status");
         changeTableStatusButton.addActionListener(new java.awt.event.ActionListener() {
@@ -67,6 +66,13 @@ public class WaiterGUI extends javax.swing.JFrame {
 
         jButton4.setText("Cancel Order");
 
+        jButton1.setText("Assigned Table");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -81,12 +87,16 @@ public class WaiterGUI extends javax.swing.JFrame {
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(layout.createSequentialGroup()
                                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                    .add(jLabel2)
-                                    .add(jLabel3))
+                                    .add(jButton1)
+                                    .add(layout.createSequentialGroup()
+                                        .add(14, 14, 14)
+                                        .add(jLabel2)))
                                 .add(74, 74, 74)
-                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                                     .add(waiterGUIEmpText, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 205, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                    .add(WaiterGUITableText, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 58, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                                    .add(layout.createSequentialGroup()
+                                        .add(WaiterGUITableText)
+                                        .add(102, 102, 102))))
                             .add(layout.createSequentialGroup()
                                 .add(changeTableStatusButton)
                                 .add(35, 35, 35)
@@ -108,9 +118,9 @@ public class WaiterGUI extends javax.swing.JFrame {
                     .add(waiterGUIEmpText, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .add(18, 18, 18)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jLabel3)
-                    .add(WaiterGUITableText, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .add(28, 28, 28)
+                    .add(WaiterGUITableText, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jButton1))
+                .add(26, 26, 26)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(changeTableStatusButton)
                     .add(jButton3)
@@ -143,6 +153,15 @@ public class WaiterGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error!! Table Status not changed");
         }
     }//GEN-LAST:event_changeTableStatusButtonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        AssignedTableSelectionGUI assignTable = new AssignedTableSelectionGUI();
+      
+       assignTable.selectAssignedTable(empID);
+       String table = assignTable.getAssignedTable(empID);
+       WaiterGUITableText.setText(table);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -181,19 +200,20 @@ public class WaiterGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField WaiterGUITableText;
     private javax.swing.JButton changeTableStatusButton;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JButton newOrderButton;
     private javax.swing.JTextField waiterGUIEmpText;
     // End of variables declaration//GEN-END:variables
 
-    void showGUI() {
+    void showGUI(String emp) {
         
         this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         this.setVisible(true);
+        this.empID = emp;
         
     }
 }

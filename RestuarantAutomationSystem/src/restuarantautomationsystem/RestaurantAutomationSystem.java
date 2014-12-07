@@ -12,7 +12,7 @@ import GUI.EmployeeLoginGUI;
  *
  * @author karpagaganeshpatchirajan
  */
-public class RestuarantAutomationSystem {
+public class RestaurantAutomationSystem {
 
     /**
      * @param args the command line arguments
