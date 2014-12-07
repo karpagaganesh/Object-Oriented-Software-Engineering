@@ -121,33 +121,37 @@ public class EmployeeLoginGUI extends javax.swing.JFrame {
         boolean status = false;
         String empID = null;
         String password = null;
-        while(status == false){
+        
             empID = empText.getText();
             password = passwordText.getText();
             if(!empID.isEmpty() && !password.isEmpty() ){
                 Controller controller = new Controller();
                 status = controller.EnterCredentials(empID,password);
-                if(status = true){
+                if(status == true){
                     WaiterGUI waitergui = new WaiterGUI();
                     waitergui.showGUI();
                 }
+                else{
+                     JOptionPane.showMessageDialog(null, "Invalid Credentials");
+                }
+                status = false;
             }
             else if(empID.isEmpty() && password.isEmpty()){
                 
                 JOptionPane.showMessageDialog(null, "Emp ID & Password is mandatory");
-                    break;
+                    
             }
             else if(empID.isEmpty()){
                 JOptionPane.showMessageDialog(null, "Emp ID is mandatory");
                 passwordText.setText(null);
-                    break;
+                    
             }
             else if(password.isEmpty()){
                 JOptionPane.showMessageDialog(null, "Password is mandatory");
-                    break;
+                  
             }
             
-        }
+        
     }//GEN-LAST:event_loginGUIOkButtonActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

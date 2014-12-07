@@ -4,7 +4,14 @@
  */
 package restuarantautomationsystem;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -14,13 +21,37 @@ public class Controller {
 
     public boolean EnterCredentials(String empID, String password) {
         
-        if(empID == "test" && password == "test"){
-            return true;
+       
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if(empID == "host" && password == "host"){
-                
-        }
+
+        String DBURL = "jdbc:mysql://localhost:3306/Test";
+        String username ="root";
+        String pass = "root";
+            
+        Connection dbCon = null;
+        Statement stmt = null;
+        ResultSet rs = null;
         
+        String query ="SELECT * from TestTable where ID=\""+empID+"\";";
+        try {
+            
+            dbCon = DriverManager.getConnection(DBURL, username,pass);
+            stmt = dbCon.prepareStatement(query);
+            rs = stmt.executeQuery(query);
+            
+            while(rs.next()){
+                if(rs.getString(1).equalsIgnoreCase(password)){
+                   
+                    return true;
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return false;
         
     }
