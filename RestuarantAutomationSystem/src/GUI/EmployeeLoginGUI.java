@@ -177,8 +177,8 @@ public class EmployeeLoginGUI extends javax.swing.JFrame {
     
     public void showGUI(){
         setVisible(true);
-        empText.setText("host");
-        passwordText.setText("host");
+        empText.setText("waiter");
+        passwordText.setText("waiter");
         
     }
     /**

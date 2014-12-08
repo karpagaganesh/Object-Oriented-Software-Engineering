@@ -4,6 +4,8 @@
  */
 package GUI;
 
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
@@ -34,13 +36,26 @@ public class WaiterGUI extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        waiterGUIEmpText = new javax.swing.JTextField();
+        nameText = new javax.swing.JTextField();
         WaiterGUITableText = new javax.swing.JTextField();
         changeTableStatusButton = new javax.swing.JButton();
         newOrderButton = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        tabbedPanel = new javax.swing.JTabbedPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        categoriesList = new javax.swing.JList();
+        itemTabbedPanel = new javax.swing.JTabbedPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        itemList = new javax.swing.JList();
+        descriptionTabbedPanel = new javax.swing.JTabbedPane();
+        descriptionTextBox = new javax.swing.JTextField();
+        countPanel = new javax.swing.JPanel();
+        quantityTextBox = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        addButton = new javax.swing.JButton();
+        doneButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,14 +63,14 @@ public class WaiterGUI extends javax.swing.JFrame {
 
         jLabel2.setText("Employee Name");
 
-        changeTableStatusButton.setText("Change Table Status");
+        changeTableStatusButton.setText("Update Table Status");
         changeTableStatusButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 changeTableStatusButtonActionPerformed(evt);
             }
         });
 
-        newOrderButton.setText("New Order");
+        newOrderButton.setText("Make New Order");
         newOrderButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 newOrderButtonActionPerformed(evt);
@@ -72,6 +87,92 @@ public class WaiterGUI extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+
+        categoriesList.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        categoriesList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                categoriesListValueChanged(evt);
+            }
+        });
+        jScrollPane1.setViewportView(categoriesList);
+
+        tabbedPanel.addTab("Category", jScrollPane1);
+
+        itemTabbedPanel.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                itemTabbedPanelInputMethodTextChanged(evt);
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+        });
+
+        itemList.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        itemList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                itemListValueChanged(evt);
+            }
+        });
+        jScrollPane2.setViewportView(itemList);
+
+        itemTabbedPanel.addTab("Item", jScrollPane2);
+
+        descriptionTabbedPanel.addTab("Description", descriptionTextBox);
+
+        quantityTextBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                quantityTextBoxActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Quantity");
+
+        addButton.setText("Add");
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
+        });
+
+        doneButton.setText("Done");
+
+        org.jdesktop.layout.GroupLayout countPanelLayout = new org.jdesktop.layout.GroupLayout(countPanel);
+        countPanel.setLayout(countPanelLayout);
+        countPanelLayout.setHorizontalGroup(
+            countPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(countPanelLayout.createSequentialGroup()
+                .add(countPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(countPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .add(quantityTextBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 116, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(18, 18, 18)
+                        .add(addButton)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(doneButton))
+                    .add(countPanelLayout.createSequentialGroup()
+                        .add(14, 14, 14)
+                        .add(jLabel3)))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        countPanelLayout.setVerticalGroup(
+            countPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, countPanelLayout.createSequentialGroup()
+                .addContainerGap(15, Short.MAX_VALUE)
+                .add(jLabel3)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(countPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(quantityTextBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(addButton)
+                    .add(doneButton))
+                .add(12, 12, 12))
+        );
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -93,7 +194,7 @@ public class WaiterGUI extends javax.swing.JFrame {
                                         .add(jLabel2)))
                                 .add(74, 74, 74)
                                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                                    .add(waiterGUIEmpText, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 205, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                    .add(nameText, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 205, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                     .add(layout.createSequentialGroup()
                                         .add(WaiterGUITableText)
                                         .add(102, 102, 102))))
@@ -104,8 +205,18 @@ public class WaiterGUI extends javax.swing.JFrame {
                                 .add(32, 32, 32)
                                 .add(jButton3)
                                 .add(33, 33, 33)
-                                .add(jButton4)))))
-                .addContainerGap(82, Short.MAX_VALUE))
+                                .add(jButton4))
+                            .add(layout.createSequentialGroup()
+                                .add(tabbedPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 150, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(itemTabbedPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 150, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                                    .add(layout.createSequentialGroup()
+                                        .add(6, 6, 6)
+                                        .add(countPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .add(descriptionTabbedPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 244, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -115,7 +226,7 @@ public class WaiterGUI extends javax.swing.JFrame {
                 .add(28, 28, 28)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabel2)
-                    .add(waiterGUIEmpText, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(nameText, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .add(18, 18, 18)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(WaiterGUITableText, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -126,7 +237,16 @@ public class WaiterGUI extends javax.swing.JFrame {
                     .add(jButton3)
                     .add(newOrderButton)
                     .add(jButton4))
-                .addContainerGap(236, Short.MAX_VALUE))
+                .add(18, 18, 18)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(tabbedPanel)
+                    .add(itemTabbedPanel)
+                    .add(layout.createSequentialGroup()
+                        .add(descriptionTabbedPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 110, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .add(countPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(15, 15, 15)))
+                .addContainerGap())
         );
 
         pack();
@@ -134,18 +254,26 @@ public class WaiterGUI extends javax.swing.JFrame {
 
     private void newOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newOrderButtonActionPerformed
         // TODO add your handling code here:
-        Controller controller = new Controller();
-        int tableID = 0;
-        controller.makeNewOrder(tableID);
+        Controller controller = new Controller();        
+        controller.makeNewOrder(WaiterGUITableText.getText());
+        
+        tabbedPanel.setVisible(true);
+        ArrayList<String> categories = controller.addNewItemButton();
+        DefaultListModel category = new DefaultListModel();
+        
+        for(int i=0;i<categories.size();i++){
+            category.add(i, categories.get(i));
+        }
+        categoriesList.setModel(category);
     }//GEN-LAST:event_newOrderButtonActionPerformed
 
     private void changeTableStatusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeTableStatusButtonActionPerformed
         // TODO add your handling code here:
         Controller controller = new Controller();
-        Object o = JOptionPane.showInputDialog(null, "Enter Status");
-        String statusString = (String)o; 
-        int status = Integer.parseInt(statusString);
-        boolean ack = controller.changeTableStatus(status);
+        
+        String status = "Handling Order";
+        
+        boolean ack = controller.changeTableStatus(status,WaiterGUITableText.getText());
         if(ack){
              JOptionPane.showMessageDialog(null, "Table Status Changed"); 
         }
@@ -162,6 +290,46 @@ public class WaiterGUI extends javax.swing.JFrame {
        String table = assignTable.getAssignedTable(empID);
        WaiterGUITableText.setText(table);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void categoriesListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_categoriesListValueChanged
+        // TODO add your handling code here:
+        Controller controller = new Controller();
+        ArrayList<String> menuItems = controller.getMenuItems(categoriesList.getSelectedValue());
+        
+        DefaultListModel items = new DefaultListModel();
+        
+        for(int i=0;i<menuItems.size();i++){
+            items.add(i, menuItems.get(i));
+        }
+        itemList.setModel(items);
+        itemTabbedPanel.setVisible(true);
+    }//GEN-LAST:event_categoriesListValueChanged
+
+    private void itemListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_itemListValueChanged
+        // TODO add your handling code here:
+        Controller controller = new Controller();
+        String itemDescription = controller.getMenuItemDescription(categoriesList.getSelectedValue(),itemList.getSelectedValue());
+        descriptionTextBox.setText(itemDescription);
+        descriptionTabbedPanel.setVisible(true);
+        descriptionTextBox.setEditable(false);
+        countPanel.setVisible(true);
+    }//GEN-LAST:event_itemListValueChanged
+
+    private void itemTabbedPanelInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_itemTabbedPanelInputMethodTextChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_itemTabbedPanelInputMethodTextChanged
+
+    private void quantityTextBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quantityTextBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_quantityTextBoxActionPerformed
+
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        // TODO add your handling code here:
+        Controller addButton = new Controller();
+        int itemID = addButton.getItemID(categoriesList.getSelectedValue(),itemList.getSelectedValue());
+        int quantity = Integer.parseInt(quantityTextBox.getText());
+        addButton.addItemToOrderLine(itemID,quantity);
+    }//GEN-LAST:event_addButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -199,14 +367,27 @@ public class WaiterGUI extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField WaiterGUITableText;
+    private javax.swing.JButton addButton;
+    private javax.swing.JList categoriesList;
     private javax.swing.JButton changeTableStatusButton;
+    private javax.swing.JPanel countPanel;
+    private javax.swing.JTabbedPane descriptionTabbedPanel;
+    private javax.swing.JTextField descriptionTextBox;
+    private javax.swing.JButton doneButton;
+    private javax.swing.JList itemList;
+    private javax.swing.JTabbedPane itemTabbedPanel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField nameText;
     private javax.swing.JButton newOrderButton;
-    private javax.swing.JTextField waiterGUIEmpText;
+    private javax.swing.JTextField quantityTextBox;
+    private javax.swing.JTabbedPane tabbedPanel;
     // End of variables declaration//GEN-END:variables
 
     void showGUI(String emp) {
@@ -214,6 +395,10 @@ public class WaiterGUI extends javax.swing.JFrame {
         this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         this.setVisible(true);
         this.empID = emp;
-        
+        nameText.setText(Controller.getEmployeeName(empID));
+        tabbedPanel.setVisible(false);
+        itemTabbedPanel.setVisible(false);
+        descriptionTabbedPanel.setVisible(false);
+        countPanel.setVisible(false);
     }
 }

@@ -12,9 +12,15 @@ import java.util.List;
  * @author karpagaganeshpatchirajan
  */
 class LineItems {
+    LinkedList<OrderLineItem> lineitems = new LinkedList<OrderLineItem>();
+    
+    LinkedList<OrderLineItem> createItemList() {
+        return new LinkedList<OrderLineItem>();
+    }
 
-    LinkedList createItemList() {
-        return new LinkedList();
+    LinkedList<OrderLineItem> add(OrderLineItem item) {
+        lineitems.add(item);
+        return lineitems;
     }
     
 }

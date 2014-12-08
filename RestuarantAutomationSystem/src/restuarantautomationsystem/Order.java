@@ -4,6 +4,7 @@
  */
 package restuarantautomationsystem;
 
+import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -12,13 +13,31 @@ import java.util.List;
  * @author karpagaganeshpatchirajan
  */
 public class Order {
-
-    LinkedList createNewOrder(int tableID) {
+    int orderID;
+    String tableID;
+    private Hashtable<Integer, LinkedList<OrderLineItem>> ordemap;
+    
+    
+    Hashtable<Integer,LinkedList<OrderLineItem>> createNewOrder(String tableID) {
         LineItems lineItem = new LineItems();
-        LinkedList orderList = (LinkedList) lineItem.createItemList();
-        return orderList;
+        LinkedList<OrderLineItem> orderline = lineItem.createItemList(); 
+        Controller orderCont = new Controller();
+        orderID = orderCont.createOrderTableEntry(tableID);
+        Hashtable<Integer,LinkedList<OrderLineItem>> ordermap = new Hashtable<Integer, LinkedList<OrderLineItem>>();
+        ordermap.put(orderID, orderline);
+        return ordemap;
     }
 
+    LinkedList<OrderLineItem> makeItem(int itemID, int quantity, String desc) {
+        OrderLineItem orderlineitem = new OrderLineItem();
+        OrderLineItem item = orderlineitem.create(itemID,quantity,desc);
+        LineItems lineitem = new LineItems();
+        LinkedList<OrderLineItem> orderline  = lineitem.add(item);
+        return orderline;
+    }
+
+   
+
     
-    
+
 }

@@ -12,14 +12,17 @@ import java.util.LinkedList;
  */
 public class Table {
 
-    boolean updateTableStatus(int status) {
-        
-        System.out.println("status: "+status);
-        return true;
+    String tableID="";
+    int orderID;
+    boolean updateTableStatus(String status) {
+        Controller controller = new Controller();
+        return controller.updateTableStatus(status,this.tableID);
     }
 
-    void setCurrentOrder(LinkedList orderList) {
-        
+    void setCurrentOrder(int orderID) {
+        this.orderID = orderID;
+        Controller controller = new Controller();
+        controller.updateOrderIDinRestaurantTable(tableID,orderID);
     }
     
 }
