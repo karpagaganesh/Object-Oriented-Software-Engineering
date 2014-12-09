@@ -5,18 +5,20 @@
  */
 package restuarantautomationsystem;
 
+import java.util.Hashtable;
+import java.util.LinkedList;
+
 /**
  *
  * @author karpagaganeshpatchirajan
  */
-public class OrderLineItem {
-    int itemID;
-    int quantity;
-    OrderLineItem create(int itemID, int quantity, String desc) {
-        OrderLineItem item = new OrderLineItem();
-        item.itemID = itemID;
-        item.quantity = quantity;
-        return item;
+class OrderQueue {
+
+    boolean addToQueue(Hashtable<Integer, LinkedList<OrderLineItem>> order) {
+        
+        Controller controller = new Controller();
+        controller.updateOrderQueue(order);
+        return true;
     }
     
 }

@@ -124,6 +124,7 @@ public class EmployeeLoginGUI extends javax.swing.JFrame {
         String statusString="";
         String waiterConstant = "waiter";
         String hostConstant = "host";
+        String kitchenConstant = "kitchen";
             empID = empText.getText();
             password = passwordText.getText();
             if(!empID.isEmpty() && !password.isEmpty() ){
@@ -136,6 +137,10 @@ public class EmployeeLoginGUI extends javax.swing.JFrame {
                 else if(hostConstant.equalsIgnoreCase(statusString)){
                     HostGUI hostgui = new HostGUI();
                     hostgui.showGUI();
+                }
+                else if(kitchenConstant.equalsIgnoreCase(statusString)){
+                    KitchenStaffGUI kitchengui = new KitchenStaffGUI();
+                    kitchengui.showGUI();
                 }
                 else{
                      JOptionPane.showMessageDialog(null, "Invalid Credentials");

@@ -5,11 +5,14 @@
 package GUI;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.LinkedList;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 import restuarantautomationsystem.Controller;
+import restuarantautomationsystem.*;
 
 /**
  *
@@ -18,6 +21,7 @@ import restuarantautomationsystem.Controller;
 public class WaiterGUI extends javax.swing.JFrame {
     
     String empID ="";
+    Hashtable<Integer,LinkedList<OrderLineItem>> cacheordermap = new Hashtable<Integer,LinkedList<OrderLineItem>>();
     /**
      * Creates new form WaiterGUI
      */
@@ -142,6 +146,11 @@ public class WaiterGUI extends javax.swing.JFrame {
         });
 
         doneButton.setText("Done");
+        doneButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                doneButtonActionPerformed(evt);
+            }
+        });
 
         org.jdesktop.layout.GroupLayout countPanelLayout = new org.jdesktop.layout.GroupLayout(countPanel);
         countPanel.setLayout(countPanelLayout);
@@ -255,8 +264,8 @@ public class WaiterGUI extends javax.swing.JFrame {
     private void newOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newOrderButtonActionPerformed
         // TODO add your handling code here:
         Controller controller = new Controller();        
-        controller.makeNewOrder(WaiterGUITableText.getText());
-        
+        Hashtable<Integer,LinkedList<OrderLineItem>> ordermap = controller.makeNewOrder(WaiterGUITableText.getText());
+        cacheordermap = ordermap;
         tabbedPanel.setVisible(true);
         ArrayList<String> categories = controller.addNewItemButton();
         DefaultListModel category = new DefaultListModel();
@@ -328,8 +337,22 @@ public class WaiterGUI extends javax.swing.JFrame {
         Controller addButton = new Controller();
         int itemID = addButton.getItemID(categoriesList.getSelectedValue(),itemList.getSelectedValue());
         int quantity = Integer.parseInt(quantityTextBox.getText());
-        addButton.addItemToOrderLine(itemID,quantity);
+        cacheordermap = addButton.addItemToOrderLine(itemID,quantity,cacheordermap);
+        quantityTextBox.setText(null);
+        descriptionTextBox.setText(null);
     }//GEN-LAST:event_addButtonActionPerformed
+
+    private void doneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doneButtonActionPerformed
+        // TODO add your handling code here:
+        Controller submit = new Controller();
+        boolean flagOrder = submit.submitOrderToOrderQueue(cacheordermap);
+        if(flagOrder){
+            JOptionPane.showMessageDialog(null, "Order Created"); 
+        }
+        quantityTextBox.setText(null);
+        descriptionTextBox.setText(null);
+        super.dispose();
+    }//GEN-LAST:event_doneButtonActionPerformed
 
     /**
      * @param args the command line arguments

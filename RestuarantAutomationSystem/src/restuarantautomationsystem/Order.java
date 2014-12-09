@@ -18,14 +18,13 @@ public class Order {
     private Hashtable<Integer, LinkedList<OrderLineItem>> ordemap;
     
     
-    Hashtable<Integer,LinkedList<OrderLineItem>> createNewOrder(String tableID) {
+    LinkedList<OrderLineItem> createNewOrder(String tableID) {
         LineItems lineItem = new LineItems();
         LinkedList<OrderLineItem> orderline = lineItem.createItemList(); 
         Controller orderCont = new Controller();
         orderID = orderCont.createOrderTableEntry(tableID);
-        Hashtable<Integer,LinkedList<OrderLineItem>> ordermap = new Hashtable<Integer, LinkedList<OrderLineItem>>();
-        ordermap.put(orderID, orderline);
-        return ordemap;
+        
+        return orderline;
     }
 
     LinkedList<OrderLineItem> makeItem(int itemID, int quantity, String desc) {

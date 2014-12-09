@@ -185,19 +185,18 @@ public class HostGUI extends javax.swing.JFrame {
 
     private void loadContents() {
         DefaultListModel employee = new DefaultListModel();
-        DefaultListModel table = new DefaultListModel();
-        
-       
         ArrayList<String> employeeListItems = Controller.getEmployeeList();
         for(int i=0;i<employeeListItems.size();i++){
             employee.add(i, employeeListItems.get(i));
         }
+        employeeList.setModel(employee);
         
+        DefaultListModel table = new DefaultListModel();
         ArrayList<String> tableListItems = Controller.getTableList();
         for(int i=0;i<tableListItems.size();i++){
             table.add(i, tableListItems.get(i));
         }
-         employeeList.setModel(employee);
+         
          tableList.setModel(table);
     }
 }
