@@ -4,7 +4,6 @@
  */
 package GUI;
 
-import java.util.Locale;
 import javax.swing.JOptionPane;
 import restuarantautomationsystem.Controller;
 
@@ -183,8 +182,7 @@ public class EmployeeLoginGUI extends javax.swing.JFrame {
     public void showGUI(){
         setVisible(true);
         empText.setText("waiter");
-        passwordText.setText("waiter");
-        
+        passwordText.setText("waiter");        
     }
     /**
      * @param args the command line arguments

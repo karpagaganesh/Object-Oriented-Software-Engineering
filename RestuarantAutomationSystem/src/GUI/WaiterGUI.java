@@ -82,8 +82,18 @@ public class WaiterGUI extends javax.swing.JFrame {
         });
 
         jButton3.setText("Modify Order");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Cancel Order");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Assigned Table");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -263,32 +273,43 @@ public class WaiterGUI extends javax.swing.JFrame {
 
     private void newOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newOrderButtonActionPerformed
         // TODO add your handling code here:
-        Controller controller = new Controller();        
-        Hashtable<Integer,LinkedList<OrderLineItem>> ordermap = controller.makeNewOrder(WaiterGUITableText.getText());
-        cacheordermap = ordermap;
-        tabbedPanel.setVisible(true);
-        ArrayList<String> categories = controller.addNewItemButton();
-        DefaultListModel category = new DefaultListModel();
-        
-        for(int i=0;i<categories.size();i++){
-            category.add(i, categories.get(i));
+        if(WaiterGUITableText.getText().equalsIgnoreCase("")){
+            JOptionPane.showMessageDialog(null, "Select Assigned Table");
+        }else{
+            Controller controller = new Controller();        
+            Hashtable<Integer,LinkedList<OrderLineItem>> ordermap = controller.makeNewOrder(WaiterGUITableText.getText());
+            cacheordermap = ordermap;
+            tabbedPanel.setVisible(true);
+            ArrayList<String> categories = controller.addNewItemButton();
+            DefaultListModel category = new DefaultListModel();
+
+            for(int i=0;i<categories.size();i++){
+                category.add(i, categories.get(i));
+            }
+            categoriesList.setModel(category);
         }
-        categoriesList.setModel(category);
+        
     }//GEN-LAST:event_newOrderButtonActionPerformed
 
     private void changeTableStatusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeTableStatusButtonActionPerformed
         // TODO add your handling code here:
-        Controller controller = new Controller();
-        
-        String status = "Handling Order";
-        
-        boolean ack = controller.changeTableStatus(status,WaiterGUITableText.getText());
-        if(ack){
-             JOptionPane.showMessageDialog(null, "Table Status Changed"); 
+        if(WaiterGUITableText.getText().equalsIgnoreCase("")){
+            JOptionPane.showMessageDialog(null, "Select Assigned Table");        
         }
         else{
-            JOptionPane.showMessageDialog(null, "Error!! Table Status not changed");
+            Controller controller = new Controller();
+        
+            String status = "Handling Order";
+
+            boolean ack = controller.changeTableStatus(status,WaiterGUITableText.getText());
+            if(ack){
+                 JOptionPane.showMessageDialog(null, "Table Status Changed"); 
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Error!! Table Status not changed");
+            }
         }
+        
     }//GEN-LAST:event_changeTableStatusButtonActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -354,6 +375,24 @@ public class WaiterGUI extends javax.swing.JFrame {
         super.dispose();
     }//GEN-LAST:event_doneButtonActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        if(WaiterGUITableText.getText().equalsIgnoreCase("")){
+            JOptionPane.showMessageDialog(null, "Select Assigned Table");        
+        }
+        else{
+            tabbedPanel.setVisible(true);
+            
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        if(WaiterGUITableText.getText().equalsIgnoreCase("")){
+            JOptionPane.showMessageDialog(null, "Select Assigned Table");        
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -418,6 +457,8 @@ public class WaiterGUI extends javax.swing.JFrame {
         this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         this.setVisible(true);
         this.empID = emp;
+        WaiterGUITableText.setEditable(false);
+        nameText.setEditable(false);
         nameText.setText(Controller.getEmployeeName(empID));
         tabbedPanel.setVisible(false);
         itemTabbedPanel.setVisible(false);
