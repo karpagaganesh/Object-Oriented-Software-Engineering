@@ -22,6 +22,7 @@ public class WaiterGUI extends javax.swing.JFrame {
     
     String empID ="";
     Hashtable<Integer,LinkedList<OrderLineItem>> cacheordermap = new Hashtable<Integer,LinkedList<OrderLineItem>>();
+    int OrderIdForAlert ;
     /**
      * Creates new form WaiterGUI
      */
@@ -60,6 +61,7 @@ public class WaiterGUI extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         addButton = new javax.swing.JButton();
         doneButton = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -193,56 +195,66 @@ public class WaiterGUI extends javax.swing.JFrame {
                 .add(12, 12, 12))
         );
 
+        jButton2.setText("Close");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
+                .add(80, 80, 80)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(layout.createSequentialGroup()
-                        .add(274, 274, 274)
-                        .add(jLabel1))
-                    .add(layout.createSequentialGroup()
-                        .add(80, 80, 80)
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(jButton1)
                             .add(layout.createSequentialGroup()
-                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                    .add(jButton1)
-                                    .add(layout.createSequentialGroup()
-                                        .add(14, 14, 14)
-                                        .add(jLabel2)))
-                                .add(74, 74, 74)
-                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                                    .add(nameText, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 205, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                    .add(layout.createSequentialGroup()
-                                        .add(WaiterGUITableText)
-                                        .add(102, 102, 102))))
+                                .add(14, 14, 14)
+                                .add(jLabel2)))
+                        .add(74, 74, 74)
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                            .add(nameText, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 205, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                             .add(layout.createSequentialGroup()
-                                .add(changeTableStatusButton)
-                                .add(35, 35, 35)
-                                .add(newOrderButton)
-                                .add(32, 32, 32)
-                                .add(jButton3)
-                                .add(33, 33, 33)
-                                .add(jButton4))
+                                .add(WaiterGUITableText)
+                                .add(102, 102, 102))))
+                    .add(layout.createSequentialGroup()
+                        .add(changeTableStatusButton)
+                        .add(35, 35, 35)
+                        .add(newOrderButton)
+                        .add(32, 32, 32)
+                        .add(jButton3)
+                        .add(33, 33, 33)
+                        .add(jButton4))
+                    .add(layout.createSequentialGroup()
+                        .add(tabbedPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 150, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(itemTabbedPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 150, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                             .add(layout.createSequentialGroup()
-                                .add(tabbedPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 150, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(itemTabbedPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 150, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                                    .add(layout.createSequentialGroup()
-                                        .add(6, 6, 6)
-                                        .add(countPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .add(descriptionTabbedPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 244, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))))
+                                .add(6, 6, 6)
+                                .add(countPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .add(descriptionTabbedPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 244, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(48, Short.MAX_VALUE))
+            .add(layout.createSequentialGroup()
+                .add(274, 274, 274)
+                .add(jLabel1)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(jButton2)
+                .add(39, 39, 39))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
                 .add(58, 58, 58)
-                .add(jLabel1)
-                .add(28, 28, 28)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jLabel1)
+                    .add(jButton2))
+                .add(15, 15, 15)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabel2)
                     .add(nameText, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
@@ -318,9 +330,14 @@ public class WaiterGUI extends javax.swing.JFrame {
       
        assignTable.selectAssignedTable(empID);
        String table = assignTable.getAssignedTable(empID);
+       table = assignTable.getAssignedTable(empID);
+        
        WaiterGUITableText.setText(table);
+       
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    
+    
+    
     private void categoriesListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_categoriesListValueChanged
         // TODO add your handling code here:
         Controller controller = new Controller();
@@ -333,6 +350,8 @@ public class WaiterGUI extends javax.swing.JFrame {
         }
         itemList.setModel(items);
         itemTabbedPanel.setVisible(true);
+        descriptionTabbedPanel.setVisible(false);
+        countPanel.setVisible(false);
     }//GEN-LAST:event_categoriesListValueChanged
 
     private void itemListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_itemListValueChanged
@@ -343,6 +362,8 @@ public class WaiterGUI extends javax.swing.JFrame {
         descriptionTabbedPanel.setVisible(true);
         descriptionTextBox.setEditable(false);
         countPanel.setVisible(true);
+        quantityTextBox.setText("1");
+                
     }//GEN-LAST:event_itemListValueChanged
 
     private void itemTabbedPanelInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_itemTabbedPanelInputMethodTextChanged
@@ -367,12 +388,18 @@ public class WaiterGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         Controller submit = new Controller();
         boolean flagOrder = submit.submitOrderToOrderQueue(cacheordermap);
+        
         if(flagOrder){
-            JOptionPane.showMessageDialog(null, "Order Created"); 
-        }
         quantityTextBox.setText(null);
         descriptionTextBox.setText(null);
-        super.dispose();
+        ConfirmOrderGUI confirmOrder = new ConfirmOrderGUI();
+        confirmOrder.showGUI(cacheordermap);
+        confirmOrder.loadContents(cacheordermap);
+        }
+        tabbedPanel.setVisible(false);
+        itemTabbedPanel.setVisible(false);
+        descriptionTabbedPanel.setVisible(false);
+        countPanel.setVisible(false);
     }//GEN-LAST:event_doneButtonActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -392,6 +419,11 @@ public class WaiterGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Select Assigned Table");        
         }
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        super.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -428,7 +460,7 @@ public class WaiterGUI extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField WaiterGUITableText;
+    public static javax.swing.JTextField WaiterGUITableText;
     private javax.swing.JButton addButton;
     private javax.swing.JList categoriesList;
     private javax.swing.JButton changeTableStatusButton;
@@ -439,6 +471,7 @@ public class WaiterGUI extends javax.swing.JFrame {
     private javax.swing.JList itemList;
     private javax.swing.JTabbedPane itemTabbedPanel;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
@@ -458,6 +491,7 @@ public class WaiterGUI extends javax.swing.JFrame {
         this.setVisible(true);
         this.empID = emp;
         WaiterGUITableText.setEditable(false);
+        quantityTextBox.setText("1");
         nameText.setEditable(false);
         nameText.setText(Controller.getEmployeeName(empID));
         tabbedPanel.setVisible(false);
@@ -465,4 +499,6 @@ public class WaiterGUI extends javax.swing.JFrame {
         descriptionTabbedPanel.setVisible(false);
         countPanel.setVisible(false);
     }
+
+    
 }

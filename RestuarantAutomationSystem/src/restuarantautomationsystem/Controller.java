@@ -269,7 +269,8 @@ public class Controller {
                         "FROM MenuItem\n" +
                         "INNER JOIN OrderQueue\n" +
                         "ON MenuItem.ItemID=OrderQueue.ItemID\n" +
-                        "WHERE OrderQueue.Status=\"Ordered\";";
+                        "WHERE OrderQueue.Status=\"Ordered\""+
+                        "ORDER BY OrderQueue.ID ASC;";
         try {
             
             dbCon = DriverManager.getConnection(DBURL, username,pass);
@@ -287,6 +288,45 @@ public class Controller {
         return result;
     }
 
+    public static ArrayList<String> getIDQueueList() {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        String DBURL = "jdbc:mysql://localhost:3306/restaurant";
+        String username ="root";
+        String pass = "root";
+            
+        Connection dbCon = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+        ArrayList<String> result = new ArrayList<String>();
+        //String query ="SELECT OrderQueue.idOrderQueue, MenuItem.Item,OrderQueue.Quantity\n" +
+        String query ="SELECT OrderQueue.ID\n" +
+                        "FROM MenuItem\n" +
+                        "INNER JOIN OrderQueue\n" +
+                        "ON MenuItem.ItemID=OrderQueue.ItemID\n" +
+                        "WHERE OrderQueue.Status=\"Ordered\""+
+                        "ORDER BY OrderQueue.ID ASC;";
+        try {
+            
+            dbCon = DriverManager.getConnection(DBURL, username,pass);
+            stmt = dbCon.prepareStatement(query);
+            rs = stmt.executeQuery(query);
+            
+            while(rs.next()){
+                result.add(rs.getString(1));
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        
+        return result;
+    }
+    
     public static ArrayList<String> getOrderQueueStatus() {
         
         try {
@@ -308,7 +348,8 @@ public class Controller {
                         "FROM MenuItem\n" +
                         "INNER JOIN OrderQueue\n" +
                         "ON MenuItem.ItemID=OrderQueue.ItemID\n" +
-                        "WHERE OrderQueue.Status=\"Ordered\";";
+                        "WHERE OrderQueue.Status=\"Ordered\""+
+                        "ORDER BY OrderQueue.ID ASC;";
         try {
             
             dbCon = DriverManager.getConnection(DBURL, username,pass);
@@ -347,7 +388,9 @@ public class Controller {
                         "FROM MenuItem\n" +
                         "INNER JOIN OrderQueue\n" +
                         "ON MenuItem.ItemID=OrderQueue.ItemID\n" +
-                        "WHERE OrderQueue.Status=\"Ordered\";";
+                        "WHERE OrderQueue.Status=\"Ordered\"" +
+                        "ORDER BY OrderQueue.ID ASC;";
+                
         try {
             
             dbCon = DriverManager.getConnection(DBURL, username,pass);
@@ -414,6 +457,7 @@ public class Controller {
         ResultSet rs = null;
         
         String query ="SELECT * from employee where employeeID=\""+empID+"\";";
+        
         try {
             
             dbCon = DriverManager.getConnection(DBURL, username,pass);
@@ -421,9 +465,9 @@ public class Controller {
             rs = stmt.executeQuery(query);
             
             while(rs.next()){
-                if(rs.getString(1).equalsIgnoreCase(password)){
+                if(rs.getString(2).equalsIgnoreCase(password)){
                    
-                    return rs.getString(2);
+                    return rs.getString(3);
                 }
             }
         } catch (SQLException ex) {
@@ -765,6 +809,39 @@ public class Controller {
                         } 
                     }
                 }
+    }
+
+    public String getItemName(int ID) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        String DBURL = "jdbc:mysql://localhost:3306/restaurant";
+        String username ="root";
+        String pass = "root";
+            
+        Connection dbCon = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+        String result = null;
+        String query ="SELECT Item from MenuItem where ItemID="+ID+";";
+        try {
+            
+            dbCon = DriverManager.getConnection(DBURL, username,pass);
+            stmt = dbCon.prepareStatement(query);
+            rs = stmt.executeQuery(query);
+            
+            while(rs.next()){
+                result = rs.getString(1);
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        
+        return result;
     }
 
     

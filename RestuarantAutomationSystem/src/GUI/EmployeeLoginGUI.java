@@ -36,6 +36,7 @@ public class EmployeeLoginGUI extends javax.swing.JFrame {
         passwordText = new javax.swing.JTextField();
         loginGUIOkButton = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,6 +66,13 @@ public class EmployeeLoginGUI extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Close");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -85,7 +93,9 @@ public class EmployeeLoginGUI extends javax.swing.JFrame {
                             .add(passwordText))))
                 .addContainerGap(233, Short.MAX_VALUE))
             .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-                .add(0, 0, Short.MAX_VALUE)
+                .add(84, 84, 84)
+                .add(jButton1)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .add(loginGUIOkButton)
                 .add(29, 29, 29)
                 .add(jButton2)
@@ -107,7 +117,8 @@ public class EmployeeLoginGUI extends javax.swing.JFrame {
                 .add(40, 40, 40)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(loginGUIOkButton)
-                    .add(jButton2))
+                    .add(jButton2)
+                    .add(jButton1))
                 .addContainerGap(65, Short.MAX_VALUE))
         );
 
@@ -142,6 +153,7 @@ public class EmployeeLoginGUI extends javax.swing.JFrame {
                     kitchengui.showGUI();
                 }
                 else{
+                    System.out.println(statusString);
                      JOptionPane.showMessageDialog(null, "Invalid Credentials");
                 }
                 status = false;
@@ -175,13 +187,18 @@ public class EmployeeLoginGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_empTextActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * User Defined Methods
      */
     
     public void showGUI(){
         setVisible(true);
-        empText.setText("waiter");
+        empText.setText("waiter1");
         passwordText.setText("waiter");        
     }
     /**
@@ -220,6 +237,7 @@ public class EmployeeLoginGUI extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField empText;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

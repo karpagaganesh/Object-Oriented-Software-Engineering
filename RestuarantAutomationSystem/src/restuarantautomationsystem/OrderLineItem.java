@@ -10,8 +10,8 @@ package restuarantautomationsystem;
  * @author karpagaganeshpatchirajan
  */
 public class OrderLineItem {
-    int itemID;
-    int quantity;
+    public int itemID;
+    public int quantity;
     OrderLineItem create(int itemID, int quantity, String desc) {
         OrderLineItem item = new OrderLineItem();
         item.itemID = itemID;

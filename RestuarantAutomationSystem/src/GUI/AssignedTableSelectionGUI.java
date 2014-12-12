@@ -93,6 +93,7 @@ public class AssignedTableSelectionGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         String tableID = (String)assignedTableList.getSelectedValue();
         Controller.updateEmployeeWithTable(empID,tableID);
+        WaiterGUI.WaiterGUITableText.setText(tableID);
         super.dispose();
     }//GEN-LAST:event_okButtonActionPerformed
 
@@ -151,7 +152,7 @@ public class AssignedTableSelectionGUI extends javax.swing.JFrame {
         DefaultListModel table = new DefaultListModel();
         ArrayList<String> tableListItems = Controller.getTableList(empID);
         for(int i=0;i<tableListItems.size();i++){
-            table.add(i, tableListItems.get(i));
+            table.add(i, tableListItems.get(i));            
         }
         assignedTableList.setModel(table);
     }
